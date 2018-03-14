@@ -17,7 +17,7 @@ In the offline phase, we train topic-models to predict the behavior of the perso
 ## Frontend
 [1] A web server will be setup, that takes in input as the username of the person. 
 
-[2] We query this username in the Twitter API and crawl the last K tweets of this person as a list of JSON objects.
+[2] We query this username in the [Twitter Scrapper](https://github.com/kennethreitz/twitter-scraper) and crawl the last K tweets of this person as a list of JSON objects.
 
 [3] This list is sent to backend where recommendation computations happen as follows:
 

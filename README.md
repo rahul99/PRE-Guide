@@ -20,6 +20,8 @@ In the offline phase, we train topic-models to predict the behavior of the perso
 [2] We query this username in the Twitter API and crawl the last K tweets of this person as a list of JSON objects.
 
 [3] This list is sent to backend where recommendation computations happen as follows:
+
   ..[a]. step 1
+  
   ..[b]. step 2
 

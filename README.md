@@ -21,7 +21,11 @@ In the offline phase, we train topic-models to predict the behavior of the perso
 
 [3] This list is sent to backend where recommendation computations happen as follows:
 
-  ..[a]. step 1
+  [a]. Collect the JSON list, parse it and create a sequence of feature vectors, one for each json
   
-  ..[b]. step 2
+  [b]. Predict a topic for each feature vector. Add the probabilities and create a cumulative list of top-k categories.
+  
+  [c]. Query a top recommended book in each category and create a list of this category.
+    
+[4] The client API collects this list and displays in the browser in the order.
 

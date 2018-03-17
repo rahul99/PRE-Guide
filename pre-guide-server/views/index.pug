@@ -1,0 +1,13 @@
+extends layout
+
+block content
+	h1 Personalized Recommendation Engine: Guided by Behaviour
+	form(method='POST', action='/recommend')
+		#form-group
+			label Username:
+			input.form-control(name='username' type='text')
+		input.btn.btn-primary(type='submit' value='Submit')
+	if tweets
+		hr
+		h1 Tweets by #{username}
+		p #{tweets}

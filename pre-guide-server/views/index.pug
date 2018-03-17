@@ -4,8 +4,9 @@ block content
 	h1 Personalized Recommendation Engine: Guided by Behaviour
 	form(method='POST', action='/recommend')
 		#form-group
-			label Username:
+			label Username: 
 			input.form-control(name='username' type='text')
+		br
 		input.btn.btn-primary(type='submit' value='Submit')
 	if tweets
 		hr

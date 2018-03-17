@@ -22,4 +22,4 @@ tweets = tweets[0:num_tweets]
 # Return tweets to Node server
 # print(str(tweets))
 print(unidecode.unidecode_expect_nonascii(str(tweets)))
-# sys.stdout.flush()
+sys.stdout.flush()

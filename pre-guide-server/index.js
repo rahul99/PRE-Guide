@@ -2,6 +2,7 @@
 const express = require('express')
 const path = require('path')
 const bodyParser = require('body-parser')
+const pythonShell = require('python-shell')
 
 // Init App
 const app = express()
@@ -24,9 +25,29 @@ app.get('/', function(req, res) {
 app.post('/recommend', function(req, res) {
 	console.log(req.body)
 
-	res.render('index', {
-		username: req.body.username,
-		tweets: 'Hello World!'
+	// Call twitter-scraper python script
+	var options = {
+		mode: 'text',
+		pythonPath: 'C:/Users/alant/Anaconda3/python.exe',
+		scriptPath: '../twitter-scraper/',
+		args:
+		[
+			req.body.username,	// username
+			20					// number of tweets
+		]
+	}
+
+	pythonShell.run('main.py', options, function(err, results) {
+		if(err) {
+			throw err
+		} else {
+			console.log(results)
+
+			res.render('index', {
+				username: req.body.username,
+				tweets: results
+			})
+		}
 	})
 })
 

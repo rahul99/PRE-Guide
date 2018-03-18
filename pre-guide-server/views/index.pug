@@ -1,14 +1,114 @@
 extends layout
 
 block content
-	h1 Personalized Recommendation Engine: Guided by Behaviour
-	form(method='POST', action='/recommend')
-		#form-group
-			label Username: 
-			input.form-control(name='username' type='text')
-		br
-		input.btn.btn-primary(type='submit' value='Submit')
-	if tweets
-		hr
-		h1 Tweets by #{username}
-		p #{tweets}
+	.row(style='height:100%; background-color: rgba(0, 0, 0, 0.6); ')
+		.col-lg-6(style='height:100%;')
+			br
+			br
+			.row
+				.col-1
+				.col-10
+					a(href='http://localhost:3000')
+						i.fas.fa-book(style='font-size:40pt;')
+					br
+					br
+					br
+					br
+					br
+					br
+					h1 PRE-GUIDE
+					br
+					p Personalized Recommendation Engine: Guided by Behaviour
+					p Get personalized recommendation for books based on your recent tweeting behaviour.
+					br
+					form(method='POST', action='/recommend')
+						.form-row
+							.col-5
+								input.form-control(name='username' type='text' placeholder='Enter twitter username')
+								small.form-text.text-muted
+							.col-3
+								input.form-control.btn.btn-primary(type='submit' value='Recommend!')
+				.col-1
+			br
+		.col-lg-6(style='background-color: #0c0c0c; overflow:scroll;')
+			br
+			br
+			br
+			.row
+				.col-1
+				.col-10
+					.row
+						h2 HERE'S WHAT WE FOUND FOR @NUSCOMPUTING
+						br
+						p Based on <a href="http://www.twitter.com/nuscomputing" target="_blank">@NUSComputing</a>'s last 100 tweets, we think that they have an interest in the topic <b>History</b>. Here are some top picks that they might like!
+						br
+					.row
+						.col-lg-6
+							.row
+								.col(style='padding: 0px 5px')
+									a(href='#')
+										.cont
+											img.img-fluid.image(src='images/1.jpg')
+											.overlay
+												.text CLICK
+							br
+							.row
+								.col
+									h6 FLY IN THE SKY
+									hr(style='border: thin solid #0f33ff; width:20px;' align='left')
+									p This is what I love, and can't stop loving! I'm told to enjoy every moment, every hour, every minute.
+							br
+						.col-lg-6
+							.row
+								.col(style='padding: 0px 5px')
+									a(href='#')
+										.cont
+											img.img-fluid.image(src='images/2.jpg')
+											.overlay
+												.text CLICK
+							br
+							.row
+								.col
+									h6 THE LITTLE PRINCE
+									hr(style='border: thin solid #0f33ff; width: 20px;' align='left')
+									p This is what I love, and can't stop loving! I'm told to enjoy every moment, every hour, every minute.
+							br
+						.col-lg-6
+							.row
+								.col(style='padding: 0px 5px')
+									a(href='#')
+										.cont
+											img.img-fluid.image(src='images/3.jpg')
+											.overlay
+												.text CLICK
+							br
+							.row
+								.col
+									h6 CRACKING THE CODE INTERVIEW
+									hr(style='border: thin solid #0f33ff; width:20px;' align='left')
+									p This is what I love, and can't stop loving! I'm told to enjoy every moment, every hour, every minute.
+							br
+						.col-lg-6
+							.row
+								.col(style='padding: 0px 5px')
+									a(href='#')
+										.cont
+											img.img-fluid.image(src='images/4.jpg')
+											.overlay
+												.text CLICK
+							br
+							.row
+								.col
+									h6 TUESDAYS WITH MORRIE
+									hr(style='border: thin solid #0f33ff; width: 20px;' align='left')
+									p This is what I love, and can't stop loving! I'm told to enjoy every moment, every hour, every minute.
+							br
+					if tweets
+						.row
+							hr(style='border-top: thin solid #ffffff; width: 100%;')
+							br
+							br
+							h3 Tweets by @#{username}
+							p #{tweets}
+				.col-1
+			br

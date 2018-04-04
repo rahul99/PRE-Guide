@@ -1,0 +1,6 @@
+alt.atheism 10th-century
+alt.atheism 11th-century
+alt.atheism 12th-century
+comp.graphics 11th-century
+comp.graphics 13th-century
+comp.os.ms-windows.misc 14th-century

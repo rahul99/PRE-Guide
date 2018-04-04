@@ -1,7 +1,7 @@
 #!/usr/bin/python
 import sys
 
-def getMappings(filename, query_string, query_type):
+def get_mappings(filename, query_string, query_type):
 	# Load file
 	with open(filename, 'r') as f:
 		mapping = f.readlines()
@@ -39,7 +39,7 @@ if __name__ == "__main__":
 
 	# Get mappings
 	if args.__len__() == 4:
-		result = getMappings(args[1], args[2], args[3])
+		result = get_mappings(args[1], args[2], args[3])
 		print(result)
 	else:
 		print("usage: news2books.py <mappings_file_name> <query_string> <query_type>")

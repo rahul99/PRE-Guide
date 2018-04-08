@@ -47,7 +47,8 @@ app.post('/recommend', function(req, res) {
 			throw err
 		} else {
 			// Log tweets on console
-			console.log(tweets)
+			let jsonTweets = JSON.parse(tweets)
+			console.log(jsonTweets)
 
 			// Prepare options to invoke classifier python script
 			options = {
@@ -70,8 +71,9 @@ app.post('/recommend', function(req, res) {
 
 					// Render result on page
 					res.render('index', {
-						username: req.body.username
-						// tweets: jsonRec.tweets[0]
+						username: req.body.username,
+						tweets: jsonTweets.tweets
+						// recommendations: jsonRec.tweets[0]
 					})
 				}
 			})

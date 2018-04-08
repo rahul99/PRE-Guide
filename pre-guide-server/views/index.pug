@@ -139,9 +139,13 @@ block content
 										p This is what I love, and can't stop loving! I'm told to enjoy every moment, every hour, every minute.
 								br
 						.row
-							hr(style='border-top: thin solid #ffffff; width: 100%;')
-							br
-							br
-							h3 Tweets by @#{username}
+							table.table.table-hover.table-light.table-striped(style='color: #000;')
+								thead.thead-dark
+									tr
+										th Tweets by @#{username}
+								tbody
+									each tweet, i in tweets
+										tr
+											td= tweet
 					.col-1
 				br

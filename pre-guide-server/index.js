@@ -26,9 +26,10 @@ app.get('/', function(req, res) {
 
 // Recommend Route
 app.post('/recommend', function(req, res) {
+
 	console.log(req.body)
 
-	// Call twitter-scraper python script
+	// Prepare options to invoke twitter-scraper python script
 	var options = {
 		mode: 'text',
 		pythonPath: 'C:/Users/alant/Anaconda3/python.exe',
@@ -40,15 +41,39 @@ app.post('/recommend', function(req, res) {
 		]
 	}
 
-	pythonShell.run('main.py', options, function(err, results) {
+	// Retrieve tweets using twitter-scraper
+	pythonShell.run('main.py', options, function(err, tweets) {
 		if(err) {
 			throw err
 		} else {
-			console.log(results)
+			// Log tweets on console
+			console.log(tweets)
 
-			res.render('index', {
-				username: req.body.username,
-				tweets: results
+			// Prepare options to invoke classifier python script
+			options = {
+				mode: 'text',
+				pythonPath: 'C:/Users/alant/Anaconda3/python.exe',
+				scriptPath: '../classifier',
+				args:
+				[
+					tweets
+				]
+			}
+
+			// Get recommendation using classifier
+			pythonShell.run('main.py', options, function(err, recommendations) {
+				if(err) {
+					throw err
+				} else {
+					let jsonRec = JSON.parse(recommendations)
+					console.log(jsonRec)
+
+					// Render result on page
+					res.render('index', {
+						username: req.body.username
+						// tweets: jsonRec.tweets[0]
+					})
+				}
 			})
 		}
 	})

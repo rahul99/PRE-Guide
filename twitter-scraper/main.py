@@ -1,6 +1,6 @@
 import sys
 import math
-import unidecode
+import json
 from twitter_scraper import get_tweets
 
 # Get username and number of tweets from command line arguments
@@ -12,14 +12,17 @@ num_tweets = int(sys.argv[2])
 num_pages = math.ceil(num_tweets / 20.0)
 
 # Retrieve tweets by pages
-tweets = []
+json_tweet = {
+    "tweets": []
+}
 for tweet in get_tweets(username, pages=num_pages):
-    tweets.append(tweet['text'])
+    json_tweet['tweets'].append(tweet['text'])
 
 # Remove unwanted tweets
-tweets = tweets[0:num_tweets]
+json_tweet['tweets'] = json_tweet['tweets'][0:num_tweets]
+
+# Dumps
+json_tweet_dumps = json.dumps(json_tweet)
 
 # Return tweets to Node server
-# print(str(tweets))
-print(unidecode.unidecode_expect_nonascii(str(tweets)))
-sys.stdout.flush()
+print(json_tweet_dumps)

@@ -52,11 +52,18 @@ for i in range(newsgroups.__len__()):
 			for book_tag in book_tags:
 				if book_tag[1] == tag_id:
 					tag_id_count.append(book_tag[2])
-			news_mappings_count.append([tag_id, max(tag_id_count)])
-	# mappings = mappings + news_mappings
+			news_mappings_count.append([int(tag_id), int(max(tag_id_count))])
+	# Get the most popular tag and append to mappings
+	most_popular_tag_id = 0
+	most_popular_tag_id_count = 0
+	for news_mapping in news_mappings_count:
+		if news_mapping[1] > most_popular_tag_id_count:
+			most_popular_tag_id = news_mapping[0]
+			most_popular_tag_id_count = news_mapping[1]
+	mappings.append(str(i) + ' ' + str(most_popular_tag_id) + '\n')
 
 # Write to file
-# with open('mappings.txt', 'w') as f:
-	# f.writelines(mappings)
+with open('mappings.txt', 'w') as f:
+	f.writelines(mappings)
 
 print('Program completed!')

@@ -62,7 +62,7 @@ app.post('/recommend', function(req, res) {
 			}
 
 			// Get recommendation using classifier
-			pythonShell.run('tweet_topic_model.py', options, function(err, recommendations) {
+			pythonShell.run('main.py', options, function(err, recommendations) {
 				if(err) {
 					throw err
 				} else {

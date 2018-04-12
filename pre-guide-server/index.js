@@ -3,6 +3,7 @@ const express = require('express')
 const path = require('path')
 const bodyParser = require('body-parser')
 const pythonShell = require('python-shell')
+const exec = require('node-ssh-exec')
 
 // Init App
 const app = express()
@@ -49,6 +50,21 @@ app.post('/recommend', function(req, res) {
 			// Log tweets on console
 			let jsonTweets = JSON.parse(tweets)
 			console.log(jsonTweets)
+
+			// SSH
+			// var config = {
+			// 	host: 'localhost',
+			// 	username: 'root',
+			// 	password:' root'
+			// },
+			// command = 'sh ./hello.sh ' + tweets
+			// exec(config, command, function (error, response) {
+			// 	if (error) {
+			// 		throw error
+			// 	}
+
+			// 	console.log(response)
+			// })
 
 			// Prepare options to invoke classifier python script
 			options = {

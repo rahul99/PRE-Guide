@@ -38,7 +38,7 @@ app.post('/recommend', function(req, res) {
 		args:
 		[
 			req.body.username,	// username
-			20					// number of tweets
+			10					// number of tweets
 		]
 	}
 
@@ -47,9 +47,9 @@ app.post('/recommend', function(req, res) {
 		if(err) {
 			throw err
 		} else {
-			// Log tweets on console
+			// // Log tweets on console
 			let jsonTweets = JSON.parse(tweets)
-			console.log(jsonTweets)
+			// console.log(jsonTweets)
 
 			// SSH
 			var config = {
@@ -57,43 +57,39 @@ app.post('/recommend', function(req, res) {
 			        username: '',
 			        password: ''
 			    },
-			    command = './pre_guide/python main.py ' + ;
+			    command = 'python3 ./pre_guide/tweet_topic_model.py ' + JSON.stringify(tweets)
+			    // command = 'python3 ./pre_guide/hello.py'
 			 
 			exec(config, command, function (error, response) {
 			    if (error) {
-			        throw error;
+			        throw error
 			    }
-			 
-			    console.log(response);
-			});
+
+			    let jsonResult = JSON.parse(response)
+			    console.log(jsonResult)
+			    console.log(jsonResult.length)
+			    // console.log(response)
+			})
 
 			// Prepare options to invoke classifier python script
-			options = {
-				mode: 'text',
-				pythonPath: 'C:/Users/alant/Anaconda3/python.exe',
-				scriptPath: '../classifier',
-				args:
-				[
-					tweets
-				]
-			}
+            // options = {
+            //     mode: 'text',
+            //     pythonPath: 'C:/Users/alant/Anaconda3/python.exe',
+            //     scriptPath: '../classifier',
+            //     args:
+            //     [
+            //         tweets
+            //     ]
+            // }
 
-			// Get recommendation using classifier
-			pythonShell.run('main.py', options, function(err, results) {
-				if(err) {
-					throw err
-				} else {
-					let jsonResults = JSON.parse(results)
-					console.log(jsonResults)
-
-					// Render result on page
-					res.render('index', {
-						username: req.body.username,
-						tweets: jsonTweets.tweets
-						// recommendations: jsonRec.tweets[0]
-					})
-				}
-			})
+            // // Get recommendation using classifier
+            // pythonShell.run('main.py', options, function(err, results) {
+            //     if(err) {
+            //         throw err
+            //     } else {
+            //     	console.log(results)
+            //     }
+            // })
 		}
 	})
 })

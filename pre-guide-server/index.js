@@ -52,19 +52,20 @@ app.post('/recommend', function(req, res) {
 			console.log(jsonTweets)
 
 			// SSH
-			// var config = {
-			// 	host: 'localhost',
-			// 	username: 'root',
-			// 	password:' root'
-			// },
-			// command = 'sh ./hello.sh ' + tweets
-			// exec(config, command, function (error, response) {
-			// 	if (error) {
-			// 		throw error
-			// 	}
-
-			// 	console.log(response)
-			// })
+			var config = {
+			        host: '',
+			        username: '',
+			        password: ''
+			    },
+			    command = './pre_guide/python main.py ' + ;
+			 
+			exec(config, command, function (error, response) {
+			    if (error) {
+			        throw error;
+			    }
+			 
+			    console.log(response);
+			});
 
 			// Prepare options to invoke classifier python script
 			options = {
@@ -78,12 +79,12 @@ app.post('/recommend', function(req, res) {
 			}
 
 			// Get recommendation using classifier
-			pythonShell.run('main.py', options, function(err, recommendations) {
+			pythonShell.run('main.py', options, function(err, results) {
 				if(err) {
 					throw err
 				} else {
-					let jsonRec = JSON.parse(recommendations)
-					console.log(jsonRec)
+					let jsonResults = JSON.parse(results)
+					console.log(jsonResults)
 
 					// Render result on page
 					res.render('index', {

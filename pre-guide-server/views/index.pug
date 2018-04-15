@@ -43,106 +43,34 @@ block content
 					.col-1
 					.col-10
 						.row
-							h2 HERE'S WHAT WE FOUND FOR @NUSCOMPUTING
+							h2 HERE'S WHAT WE FOUND FOR @#{username}
 							br
-							p Based on <a href="http://www.twitter.com/nuscomputing" target="_blank">@NUSComputing</a>'s last 100 tweets, we think that they have an interest in the topic '<b>SPACE</b>'. Here are some top picks that they might like!
+							p Based on <a href='http://www.twitter.com/'+username target="_blank">@#{username}</a>'s last 100 tweets, we think that they have an interest in the topic '<b>SPACE</b>'. Here are some top book picks that they might like!
 							br
 						.row
-							.col-lg-6
-								.row
-									.col(style='padding: 0px 5px')
-										a(href='#')
-											.cont
-												img.img-fluid.image(src='images/1.jpg')
-												.overlay
-													.text CLICK
-								br
-								.row
-									.col
-										h6 FLY IN THE SKY
-										hr(style='border: thin solid #0f33ff; width:20px;' align='left')
-										p This is what I love, and can't stop loving! I'm told to enjoy every moment, every hour, every minute.
-								br
-							.col-lg-6
-								.row
-									.col(style='padding: 0px 5px')
-										a(href='#')
-											.cont
-												img.img-fluid.image(src='images/2.jpg')
-												.overlay
-													.text CLICK
-								br
-								.row
-									.col
-										h6 EARTH 2.0
-										hr(style='border: thin solid #0f33ff; width: 20px;' align='left')
-										p This is what I love, and can't stop loving! I'm told to enjoy every moment, every hour, every minute.
-								br
-							.col-lg-6
-								.row
-									.col(style='padding: 0px 5px')
-										a(href='#')
-											.cont
-												img.img-fluid.image(src='images/3.jpg')
-												.overlay
-													.text CLICK
-								br
-								.row
-									.col
-										h6 BEYOND THE UNIVERSE
-										hr(style='border: thin solid #0f33ff; width:20px;' align='left')
-										p This is what I love, and can't stop loving! I'm told to enjoy every moment, every hour, every minute.
-								br
-							.col-lg-6
-								.row
-									.col(style='padding: 0px 5px')
-										a(href='#')
-											.cont
-												img.img-fluid.image(src='images/4.jpg')
-												.overlay
-													.text CLICK
-								br
-								.row
-									.col
-										h6 GRAVITY
-										hr(style='border: thin solid #0f33ff; width: 20px;' align='left')
-										p This is what I love, and can't stop loving! I'm told to enjoy every moment, every hour, every minute.
-								br
-							.col-lg-6
-								.row
-									.col(style='padding: 0px 5px')
-										a(href='#')
-											.cont
-												img.img-fluid.image(src='images/5.jpg')
-												.overlay
-													.text CLICK
-								br
-								.row
-									.col
-										h6 UP UP AND AWAY
-										hr(style='border: thin solid #0f33ff; width: 20px;' align='left')
-										p This is what I love, and can't stop loving! I'm told to enjoy every moment, every hour, every minute.
-								br
-							.col-lg-6
-								.row
-									.col(style='padding: 0px 5px')
-										a(href='#')
-											.cont
-												img.img-fluid.image(src='images/6.jpg')
-												.overlay
-													.text CLICK
-								br
-								.row
-									.col
-										h6 100 FOOT ORBIT
-										hr(style='border: thin solid #0f33ff; width: 20px;' align='left')
-										p This is what I love, and can't stop loving! I'm told to enjoy every moment, every hour, every minute.
-								br
+							for book in books
+								.col-lg-6
+									.row
+										.col(style='padding: 0px 5px')
+											a(href='https://www.goodreads.com/book/show/'+book['goodreads_book_id']['34'] target='_blank')
+												.cont
+													img.img-fluid.image(src=book['image_url']['34'])
+													.overlay
+														.text CLICK
+									br
+									.row
+										.col
+											h5
+												a(href='https://www.goodreads.com/book/show/'+book['goodreads_book_id']['34'] target='_blank')=book['title']['34']
+												small= '  ' + book['average_rating']['34']
+											p
+												i='By ' + book['authors']['34']
+									br
 						.row
-							table.table.table-hover.table-light.table-striped(style='color: #000;')
+							table#example.table.table-hover.table-light.table-striped(style='color: #000;')
 								thead.thead-dark
 									tr
-										th Tweets by @#{username}
+										th Tweets by <a href="http://www.twitter.com/"+username target="_blank">@#{username}</a>
 								tbody
 									each tweet, i in tweets
 										tr

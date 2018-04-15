@@ -54,9 +54,9 @@ app.post('/recommend', function(req, res) {
 
 			// SSH
 			var config = {
-			        host: 'next-gpu4.d2.comp.nus.edu.sg',
-			        username: 'rahul',
-			        password: '123@nus'
+			        host: '',
+			        username: '',
+			        password: ''
 			    },
 			    // command = 'python3 ./pre_guide/tweet_topic_model.py ' + JSON.stringify(tweets)		    
 			    command = 'python3 ./pre_guide/tweet.py ' + JSON.stringify(tweets)

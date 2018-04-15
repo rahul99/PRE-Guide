@@ -34,7 +34,7 @@ block content
 				.col-1
 			br
 		if username
-			.col-lg-6(style='background-color: rgba(255, 255, 255, 0.8); color: #000; overflow:scroll;')
+			.col-lg-6(style='background-color: rgba(255, 255, 255, 1.0); color: #212529; overflow:scroll;')
 				br
 				br
 				br
@@ -45,34 +45,35 @@ block content
 							h2 HERE'S WHAT WE FOUND FOR @#{username}
 							br
 							p 
-								span Based on <a href="http://www.twitter.com/#{username}" target="_blank">@#{username}</a>'s last 10 tweets, we think that they have an interest in 
-								b= tags
-								span . Here are some top book picks that they might like!
+								span Based on your tweeting pattern, we think you might like books on 
+								b
+									a(href="http://en.wikipedia.org/wiki/"+tags target='_blank')= tags
+								span . Here are some top book picks for you!
 							br
 							.fb-share-button(data-href='https://developers.facebook.com/docs/plugins/', data-layout='button_count', data-size='small', data-mobile-iframe='true')
 								a.fb-xfbml-parse-ignore(target='_blank', href='https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&src=sdkpreparse') Share
 						.row
 							br
 						.row
-							for book in books
+							each book, i in books
 								.col-3
 									.row
-										a(href='https://www.goodreads.com/book/show/'+book['goodreads_book_id']['34'] target='_blank')
+										a(href='https://www.goodreads.com/book/show/'+book['goodreads_book_id'][keys[i].toString()] target='_blank')
 											.cont
-												img.img-fluid.image(src=book['image_url']['34'])
+												img.img-fluid.image(src=book['image_url'][keys[i].toString()])
 												.overlay
 													.text CLICK
 										br
 									.row
 										span(style='font-size: 14pt; margin-top: 10px;')
-											a(href='https://www.goodreads.com/book/show/'+book['goodreads_book_id']['34'] target='_blank')=book['title']['34']
+											a(href='https://www.goodreads.com/book/show/'+book['goodreads_book_id'][keys[i].toString()] target='_blank')=book['title'][keys[i].toString()]
 									.row
-										
 										span
-											small= '  ' + book['average_rating']['34']
+											small= book['average_rating'][keys[i].toString()]
+									.row
 										span
 											small
-												i='By ' + book['authors']['34']
+												i= book['authors'][keys[i].toString()]
 						.row
 							br
 						.row

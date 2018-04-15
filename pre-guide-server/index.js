@@ -49,17 +49,17 @@ app.post('/recommend', function(req, res) {
 		} else {
 			// // Log tweets on console
 			let jsonTweets = JSON.parse(tweets)
-			// console.log(jsonTweets)
+			console.log(jsonTweets)
 			// console.log(JSON.stringify(tweets))
 
 			// SSH
 			var config = {
-			        host: '',
-			        username: '',
-			        password: ''
+			        host: 'next-gpu4.d2.comp.nus.edu.sg',
+			        username: 'rahul',
+			        password: '123@nus'
 			    },
-			    command = 'python3 ./pre_guide/tweet_topic_model.py ' + JSON.stringify(tweets)
-			    // command = 'python3 ./pre_guide/hello.py'
+			    // command = 'python3 ./pre_guide/tweet_topic_model.py ' + JSON.stringify(tweets)		    
+			    command = 'python3 ./pre_guide/tweet.py ' + JSON.stringify(tweets)
 
 			// Render result on page
 			// res.render('index', {
@@ -72,20 +72,32 @@ app.post('/recommend', function(req, res) {
 			        throw error
 			    }
 
+			    // Trim response
+			    response = response.replace(/NaN/g, '0')
+
 			    // Parse result
 			    let jsonResult = JSON.parse(response)
-			    console.log(response)
-			    console.log(jsonResult)
-			    // console.log(typeof(jsonResult['tags']))
-			    console.log(JSON.stringify(jsonResult['tags']))
-			    console.log(typeof(JSON.stringify(jsonResult['tags'])))
+			    // console.log(jsonResult)
 			    console.log(jsonResult['books'])
+
+			    // Extra logs
+			    // console.log(typeof(jsonResult['tags']))
+			    // console.log(JSON.stringify(jsonResult['tags']))
+			    // console.log(typeof(JSON.stringify(jsonResult['tags'])))
+			    
+			    // Get keys
+			    var keys = []
+			    jsonResult['books'].forEach(function(item) {
+			    	keys.push(Object.keys(item['original_title'])[0]);
+			    });
+			    console.log(keys)
 
 			    // Render result on page
 				res.render('index', {
 					username: req.body.username,
 					tweets: jsonTweets.tweets,
-					tags: JSON.stringify(jsonResult['tags']).replace('[', '').replace(']', ''),
+					keys: keys,
+					tags: JSON.stringify(jsonResult['tags']).replace(/\[/g, '').replace(/\]/g, '').replace(/"/g, '').replace(/,/g, ', '),
 					books: jsonResult['books']
 				})
 			})

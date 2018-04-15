@@ -50,6 +50,7 @@ app.post('/recommend', function(req, res) {
 			// // Log tweets on console
 			let jsonTweets = JSON.parse(tweets)
 			// console.log(jsonTweets)
+			// console.log(JSON.stringify(tweets))
 
 			// SSH
 			var config = {
@@ -59,37 +60,35 @@ app.post('/recommend', function(req, res) {
 			    },
 			    command = 'python3 ./pre_guide/tweet_topic_model.py ' + JSON.stringify(tweets)
 			    // command = 'python3 ./pre_guide/hello.py'
+
+			// Render result on page
+			// res.render('index', {
+			// 	username: 'NUSComputing',
+			// 	tweets: jsonTweets.tweets
+			// })
 			 
 			exec(config, command, function (error, response) {
 			    if (error) {
 			        throw error
 			    }
 
+			    // Parse result
 			    let jsonResult = JSON.parse(response)
+			    console.log(response)
 			    console.log(jsonResult)
-			    console.log(jsonResult.length)
-			    // console.log(response)
+			    // console.log(typeof(jsonResult['tags']))
+			    console.log(JSON.stringify(jsonResult['tags']))
+			    console.log(typeof(JSON.stringify(jsonResult['tags'])))
+			    console.log(jsonResult['books'])
+
+			    // Render result on page
+				res.render('index', {
+					username: req.body.username,
+					tweets: jsonTweets.tweets,
+					tags: JSON.stringify(jsonResult['tags']).replace('[', '').replace(']', ''),
+					books: jsonResult['books']
+				})
 			})
-
-			// Prepare options to invoke classifier python script
-            // options = {
-            //     mode: 'text',
-            //     pythonPath: 'C:/Users/alant/Anaconda3/python.exe',
-            //     scriptPath: '../classifier',
-            //     args:
-            //     [
-            //         tweets
-            //     ]
-            // }
-
-            // // Get recommendation using classifier
-            // pythonShell.run('main.py', options, function(err, results) {
-            //     if(err) {
-            //         throw err
-            //     } else {
-            //     	console.log(results)
-            //     }
-            // })
 		}
 	})
 })

@@ -1,7 +1,7 @@
 extends layout
 
 block content
-	.row(style='height:100%; background-color: rgba(0, 0, 0, 0.6); ')
+	.row(style='height:100%; background-color: rgba(0, 0, 0, 0);')
 		.col-lg-6(style='height:100%;')
 			br
 			br
@@ -22,8 +22,7 @@ block content
 					br
 					h1(style='font-size:40pt;') PRE-GUIDE
 					br
-					p(style='font-size:15pt;') Personalized Recommendation Engine: Guided by Behaviour
-					p(style='font-size:15pt;') Get personalized recommendation for books based on your recent tweeting behaviour.
+					p(style='font-size:15pt;') Get personalized recommendation based on your recent tweeting behaviour.
 					br
 					form(method='POST', action='/recommend')
 						.form-row
@@ -35,7 +34,7 @@ block content
 				.col-1
 			br
 		if username
-			.col-lg-6(style='background-color: #0c0c0c; overflow:scroll;')
+			.col-lg-6(style='background-color: rgba(255, 255, 255, 0.8); color: #000; overflow:scroll;')
 				br
 				br
 				br
@@ -45,32 +44,44 @@ block content
 						.row
 							h2 HERE'S WHAT WE FOUND FOR @#{username}
 							br
-							p Based on <a href='http://www.twitter.com/'+username target="_blank">@#{username}</a>'s last 100 tweets, we think that they have an interest in the topic '<b>SPACE</b>'. Here are some top book picks that they might like!
+							p 
+								span Based on <a href="http://www.twitter.com/#{username}" target="_blank">@#{username}</a>'s last 10 tweets, we think that they have an interest in 
+								b= tags
+								span . Here are some top book picks that they might like!
+							br
+							.fb-share-button(data-href='https://developers.facebook.com/docs/plugins/', data-layout='button_count', data-size='small', data-mobile-iframe='true')
+								a.fb-xfbml-parse-ignore(target='_blank', href='https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&src=sdkpreparse') Share
+						.row
 							br
 						.row
 							for book in books
-								.col-lg-6
+								.col-3
 									.row
-										.col(style='padding: 0px 5px')
-											a(href='https://www.goodreads.com/book/show/'+book['goodreads_book_id']['34'] target='_blank')
-												.cont
-													img.img-fluid.image(src=book['image_url']['34'])
-													.overlay
-														.text CLICK
-									br
+										a(href='https://www.goodreads.com/book/show/'+book['goodreads_book_id']['34'] target='_blank')
+											.cont
+												img.img-fluid.image(src=book['image_url']['34'])
+												.overlay
+													.text CLICK
+										br
 									.row
-										.col
-											h5
-												a(href='https://www.goodreads.com/book/show/'+book['goodreads_book_id']['34'] target='_blank')=book['title']['34']
-												small= '  ' + book['average_rating']['34']
-											p
+										span(style='font-size: 14pt; margin-top: 10px;')
+											a(href='https://www.goodreads.com/book/show/'+book['goodreads_book_id']['34'] target='_blank')=book['title']['34']
+									.row
+										
+										span
+											small= '  ' + book['average_rating']['34']
+										span
+											small
 												i='By ' + book['authors']['34']
-									br
+						.row
+							br
+						.row
+							br
 						.row
 							table#example.table.table-hover.table-light.table-striped(style='color: #000;')
 								thead.thead-dark
 									tr
-										th Tweets by <a href="http://www.twitter.com/"+username target="_blank">@#{username}</a>
+										th Tweets by <a href="http://www.twitter.com/#{username}" target="_blank">@#{username}</a>
 								tbody
 									each tweet, i in tweets
 										tr

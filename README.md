@@ -12,7 +12,7 @@ In the offline phase, we train topic-models to predict the behavior of the perso
 
 [3] A mapping is required to create between categories in [1] and [2].
 
-[4] Optional: If needed, we can use [Book Dataset](https://github.com/uchidalab/book-dataset/tree/master/Task2), that contains a huge collection of book names in each category
+[4] Optional: Optionally, we use [Book Dataset](https://github.com/uchidalab/book-dataset/tree/master/Task2), that contains a huge collection of book names in each category.
 
 ## Frontend
 [1] A web server will be setup, that takes in input as the username of the person. 
